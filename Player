@@ -1,1 +1,55 @@
+public class Player {
+    private String name;
+    private String position;
+    private double height; //in metres;
+    private double weight; //in kilograms;
+    private double salary;
 
+    //Stats
+    private double pointsPerGame;
+    private double reboundsPerGame;
+    private double assistsPerGame;
+    private double stealsPerGame;
+    private double blocksPerGame;
+
+    public String getName() {
+        return name;
+    }
+    public String getPosition() {
+        return position;
+    }
+    public double getHeight() {
+        return height;
+    }
+    public double getWeight() {
+        return weight;
+    }
+    public double getSalary() {
+        return salary;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setPosition(String position) {
+        this.position = position;
+    }
+    public void setHeight(double height) {
+        this.height = height;
+    }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+    public Player(String name, String position, double height, double weight, double salary) {
+        this.name = name;
+        this.position = position;
+        this.height = height;
+        this.weight = weight;
+        this.salary = salary;
+    }
+    
+    
+
+}
