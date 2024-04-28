@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+
+public class Roster {
+    private String teamName;
+    private ArrayList<Player> roster;
+    private int forwardPlayer;
+    private int guardPlayer;
+    private int centrePlayer;
+    private int minPlayers = 10;
+    private int maxPlayers = 15;
+    private int minGuards = 2;
+    private int minForwards = 2;
+    private int minCenters = 2;
+    private double totalSalaryCap = 20000;
+    private double remainingSalaryCap = totalSalaryCap;
+    // private double minSuperstarSalary = 3000;
+    // private double minNonSuperstarSalary = 1000; 
+
+    // Method to add a player to the roster
+    public void addPlayer(Player player) {
+        if (roster.size() < maxPlayers && remainingSalaryCap >= player.getSalary()) {
+            roster.add(player);
+            if(player.getPosition().equalsIgnoreCase("Forward")) {
+                forwardPlayer++;
+            }
+            else if(player.getPosition().equalsIgnoreCase("Guard")) {
+                guardPlayer++;
+            }
+            else if(player.getPosition().equalsIgnoreCase("Centre")) {
+                centrePlayer++;
+            }
+            remainingSalaryCap -= player.getSalary();
+            System.out.println(player.getName() + " added to " + teamName + ".");
+        } else {
+            System.out.println("Cannot add " + player.getName() + ". Roster is full or salary cap exceeded.");
+        }
+    }
+
+    public void removePlayer(Player player) {
+        if(roster.size() > minPlayers) {
+            roster.remove(player);
+            if(player.getPosition().equalsIgnoreCase("Forward")) {
+                forwardPlayer--;
+            }
+            else if(player.getPosition().equalsIgnoreCase("Guard")) {
+                guardPlayer--;
+            }
+            else if(player.getPosition().equalsIgnoreCase("Centre")) {
+                centrePlayer--;
+            }
+            remainingSalaryCap += player.getSalary();
+            System.out.println(player.getName() + " added to " + teamName + ".");
+        } else {
+            System.out.println("Cannot remove " + player.getName() + ". player's number is less than 10.");
+        }
+    }
+
+    
+
+    public boolean checkRoster() {
+        if(forwardPlayer >= minForwards && centrePlayer >= minCenters && guardPlayer >= minGuards
+        && remainingSalaryCap>= 0) {
+            return true;
+        }
+
+        else {
+            return false;
+        }
+
+    }
+
+
+
+}
