@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class InjuryReserveManagement {
+    private Stack<Player> stack;
+    
+
+    public InjuryReserveManagement() {
+        this.stack = new Stack<>();
+    }
+
+    public void addToInjuryReserve(Player player, String injury) {
+        stack.push(player);
+        player.setCondition(injury);
+        System.out.println("-- Adding Player to Injury Reserve --");
+        System.out.println("Injury: " + injury);
+        System.out.println("Status: Added to Injury Reserve");
+        System.out.println();
+    }
+
+    public Player removeFromInjuryReserve() {
+        if(!stack.isEmpty()) {
+            Player player = stack.pop();
+            System.out.println("-- Removing Player from Injury Reserve --");
+            System.out.println("Player: " + player.getName());
+            System.out.println("Status: Cleared to Play");
+            System.out.println();
+            return player;
+        }
+        else {
+            System.out.println("Injury reserve is empty");
+            System.out.println();
+            return null;
+        }
+    }
+
+    public void displayInjuredPlayers() {
+        if (!stack.isEmpty()) {
+            System.out.println("List of injured players:");
+            for (Player player : stack) {
+                System.out.println(player.getName() + " | " + player.getCondition());
+            }
+            System.out.println();
+        }
+        else {
+            System.out.println("No players are currently on the injury reserve.");
+            System.out.println();
+        }
+    }
+}
