@@ -1,0 +1,33 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ContractExtensionQueue {
+    private Queue<Player> queue;
+
+    public ContractExtensionQueue() {
+        this.queue = new LinkedList<>();
+    }
+
+    public void enqueue(Player player) {
+        queue.offer(player);
+        System.out.println("-- Adding Player to Contract Extension Queue -- ");
+        System.out.println("Player: " + player.getName());
+        System.out.println("Status: Added to Contract Extension Queue");
+        System.out.println();
+    }
+
+    public Player dequeue() {
+        Player nextPlayer = queue.poll();
+        if(nextPlayer != null) {
+            System.out.println("-- Removing Player from Contract Extension Queue -- ");
+            System.out.println("Player: " + nextPlayer.getName());
+            System.out.println("Status: Contract Renewed");
+            System.out.println();
+        }
+        else {
+            System.out.println("No player in Contract Extension Queue");
+            System.out.println();
+        }
+        return nextPlayer;
+    }
+}
