@@ -1,0 +1,80 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Searching {
+    public ArrayList<Player> dynamicSearching(ArrayList<Player> roster) {
+        ArrayList<Player> result = new ArrayList<>();
+        
+        double height = 0;
+        double weight = 0;
+        String height_condition = "";
+        String weight_condition = "";
+        String position = "";
+        System.out.println("Dynamic Searching");
+        System.out.println("Format : Height,>= or <=,HEIGHT_VALUE,Weight,>= or <=,WEIGHT_VALUE,Position,-,PLAYER_POSITIOn");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Find attribute : ");
+        String[] arr = new String[9];
+        arr = sc.nextLine().split(",");
+        sc.close();
+        for(int i = 0; i < arr.length; i++) {
+            if(arr[i].equalsIgnoreCase("Height")) {
+                height = Double.parseDouble(arr[i + 2]);
+                height_condition = arr[i + 1];
+            }
+
+            if(arr[i].equalsIgnoreCase("Weight")) {
+                weight = Double.parseDouble(arr[i + 2]);
+                weight_condition = arr[i + 1];
+            }
+
+            if(arr[i].equalsIgnoreCase("Position")) {
+                position = arr[i + 2];
+            }
+        }
+
+        for (Player player : roster) {
+            if(heightFilter(height_condition, height, player) && weightFilter(weight_condition, weight, player) && postionFilter(position, player)) {
+                result.add(player);
+
+            }
+        }
+        return result;
+    }
+
+    public boolean heightFilter(String condition, double height, Player player) {
+        if(condition.equals("<=")) {
+            if(player.getHeight() <= height) {
+                return true;
+            }
+        }
+        else if(condition.equals(">=")) {
+            if(player.getHeight() >= height) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean weightFilter(String condition, double weight, Player player) {
+        if(condition.equals("<=")) {
+            if(player.getWeight() <= weight) {
+                return true;
+            }
+        }
+        else if(condition.equals(">=")) {
+            if(player.getWeight() >= weight) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean postionFilter(String position, Player player) {
+        if(player.getPosition().equals(position)) {
+            return true;
+        }
+        return false;
+    }
+
+}
