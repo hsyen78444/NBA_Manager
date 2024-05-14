@@ -2,23 +2,19 @@ public class Player {
     private String name;
     private int age;
     private String position;
-    private double height; //in metres;
-    private double weight; //in kilograms;
+    private double height; // in metres
+    private double weight; // in kilograms
     private double salary;
     private String condition = "Healthy";
 
-    //Stats
     private double pointsPerGame;
     private double reboundsPerGame;
     private double assistsPerGame;
     private double stealsPerGame;
     private double blocksPerGame;
 
-    
-
-    public Player(String name, int age, String position, double height, double weight, double salary,
-            double pointsPerGame, double reboundsPerGame, double assistsPerGame, double stealsPerGame,
-            double blocksPerGame) {
+    public Player(String name, int age, String position, double height, double weight, double salary, 
+            double pointsPerGame, double reboundsPerGame, double assistsPerGame, double stealsPerGame, double blocksPerGame) {
         this.name = name;
         this.age = age;
         this.position = position;
@@ -31,76 +27,99 @@ public class Player {
         this.stealsPerGame = stealsPerGame;
         this.blocksPerGame = blocksPerGame;
     }
+            
     public String getName() {
         return name;
     }
+            
     public String getPosition() {
         return position;
     }
+            
     public double getHeight() {
         return height;
     }
+            
     public double getWeight() {
         return weight;
     }
+            
     public double getSalary() {
         return salary;
     }
-    
+            
     public void setName(String name) {
         this.name = name;
     }
+            
     public void setPosition(String position) {
         this.position = position;
     }
+            
     public void setHeight(double height) {
         this.height = height;
     }
+            
     public void setWeight(double weight) {
         this.weight = weight;
     }
+            
     public void setSalary(double salary) {
         this.salary = salary;
     }
+            
     public int getAge() {
         return age;
     }
+            
     public void setAge(int age) {
         this.age = age;
     }
+            
     public double getPointsPerGame() {
         return pointsPerGame;
     }
+            
     public void setPointsPerGame(double pointsPerGame) {
         this.pointsPerGame = pointsPerGame;
     }
+            
     public double getReboundsPerGame() {
         return reboundsPerGame;
     }
+            
     public void setReboundsPerGame(double reboundsPerGame) {
         this.reboundsPerGame = reboundsPerGame;
     }
+            
     public double getAssistsPerGame() {
         return assistsPerGame;
     }
+            
     public void setAssistsPerGame(double assistsPerGame) {
         this.assistsPerGame = assistsPerGame;
     }
+            
     public double getStealsPerGame() {
         return stealsPerGame;
     }
+            
     public void setStealsPerGame(double stealsPerGame) {
         this.stealsPerGame = stealsPerGame;
     }
+            
     public double getBlocksPerGame() {
         return blocksPerGame;
     }
+            
     public void setBlocksPerGame(double blocksPerGame) {
         this.blocksPerGame = blocksPerGame;
     }
+            
     public String getCondition() {
         return condition;
     }
+            
     public void setCondition(String condition) {
         this.condition = condition;
     }
