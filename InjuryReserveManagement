@@ -1,9 +1,8 @@
-import java.util.*;
+import java.util.Stack;
 
 public class InjuryReserveManagement {
     private Stack<Player> stack;
     
-
     public InjuryReserveManagement() {
         this.stack = new Stack<>();
     }
@@ -12,9 +11,11 @@ public class InjuryReserveManagement {
         stack.push(player);
         player.setCondition(injury);
         System.out.println("-- Adding Player to Injury Reserve --");
-        System.out.println("Injury: " + injury);
+        System.out.println("Player: " + player.getName());
+        System.out.println("Injury: " + player.getCondition());
         System.out.println("Status: Added to Injury Reserve");
         System.out.println();
+        
     }
 
     public Player removeFromInjuryReserve() {
@@ -27,7 +28,7 @@ public class InjuryReserveManagement {
             return player;
         }
         else {
-            System.out.println("Injury reserve is empty");
+            System.out.println("Injury reserve is empty.");
             System.out.println();
             return null;
         }
@@ -42,7 +43,7 @@ public class InjuryReserveManagement {
             System.out.println();
         }
         else {
-            System.out.println("No players are currently on the injury reserve.");
+            System.out.println("Injury reserve is empty.");
             System.out.println();
         }
     }
