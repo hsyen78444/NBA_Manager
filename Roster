@@ -21,7 +21,6 @@ public class Roster {
         this.roster = new ArrayList<>();
     }
 
-    // Method to add a player to the roster
     public void addPlayer(Player player) {
         if (roster.size() < maxPlayers && remainingSalaryCap >= player.getSalary()) {
             roster.add(player);
@@ -36,7 +35,8 @@ public class Roster {
             }
             remainingSalaryCap -= player.getSalary();
             System.out.println(player.getName() + " added to " + teamName + ".");
-        } else {
+        } 
+        else {
             System.out.println("Cannot add " + player.getName() + ". Roster is full or salary cap exceeded.");
         }
     }
@@ -54,22 +54,15 @@ public class Roster {
                 centrePlayer--;
             }
             remainingSalaryCap += player.getSalary();
-            System.out.println(player.getName() + " added to " + teamName + ".");
-        } else {
-            System.out.println("Cannot remove " + player.getName() + ". player's number is less than 10.");
+            System.out.println(player.getName() + " removed from " + teamName + ".");
+        } 
+        else {
+            System.out.println("Cannot remove " + player.getName() + ". Number of players is less than 10.");
         }
     }
 
     public boolean checkRoster() {
-        if(forwardPlayer >= minForwards && centrePlayer >= minCenters && guardPlayer >= minGuards
-        && remainingSalaryCap>= 0) {
-            return true;
-        }
-
-        else {
-            return false;
-        }
-
+        return (forwardPlayer >= minForwards && centrePlayer >= minCenters && guardPlayer >= minGuards && remainingSalaryCap>= 0);
     }
 
     public void printRoster() {
@@ -90,12 +83,11 @@ public class Roster {
             String playerSPG = String.format("%6s",player.getStealsPerGame());
             String playerBPG = String.format("%6s",player.getBlocksPerGame());
 
-            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | "
-                                 + playerWeight + " | " + playerPosition + " | " + playerSalary + " | "
-                                 + playerPPG + " | " + playerRPG + " | "  + playerAPG + " | " + playerSPG + " | " + playerBPG;
+            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | " + playerWeight + " | " + playerPosition + " | " 
+                              + playerSalary + " | " + playerPPG + " | " + playerRPG + " | "  + playerAPG + " | " + playerSPG + " | " + playerBPG;
+            
             System.out.println(playerInfo);
         }
-
     }
     
 
@@ -117,47 +109,57 @@ public class Roster {
             String playerSPG = String.format("%6s",player.getStealsPerGame());
             String playerBPG = String.format("%6s",player.getBlocksPerGame());
 
-            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | "
-                                 + playerWeight + " | " + playerPosition + " | " + playerSalary + " | "
-                                 + playerPPG + " | " + playerRPG + " | "  + playerAPG + " | " + playerSPG + " | " + playerBPG;
+            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | " + playerWeight + " | " + playerPosition + " | " 
+                              + playerSalary + " | " + playerPPG + " | " + playerRPG + " | "  + playerAPG + " | " + playerSPG + " | " + playerBPG;
+            
             System.out.println(playerInfo);
         }
     }
-
-    //Getters and Setters
+    
     public String getTeamName() {
         return teamName;
     }
+    
     public ArrayList<Player> getRoster() {
         return roster;
     }
+    
     public int getForwardPlayer() {
         return forwardPlayer;
     }
+    
     public int getGuardPlayer() {
         return guardPlayer;
     }
+    
     public int getCentrePlayer() {
         return centrePlayer;
     }
+    
     public int getMinPlayers() {
         return minPlayers;
     }
+    
     public int getMaxPlayers() {
         return maxPlayers;
     }
+    
     public int getMinGuards() {
         return minGuards;
     }
+    
     public int getMinForwards() {
         return minForwards;
     }
+    
     public int getMinCenters() {
         return minCenters;
     }
+    
     public double getTotalSalaryCap() {
         return totalSalaryCap;
     }
+    
     public double getRemainingSalaryCap() {
         return remainingSalaryCap;
     }
