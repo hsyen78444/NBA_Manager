@@ -43,21 +43,26 @@ public class PlayerPerformanceRanking {
 
         
         playerScore *= 10;
+        
         if (playerScore >= 100) {
             playerScore = 100.0;
         }
+        
         double playerScore1 = Math.round(playerScore * 10) / 10.0;
+        
         return playerScore1;
     }
 
     public void printRanking(ArrayList<Player> players) {
         System.out.println("-- Player Performance Ranking --");
+        
         Collections.sort(players, new Comparator<Player>() {
             @Override
             public int compare(Player p1, Player p2) {
                 return Double.compare(calculatePlayerScore(p2), calculatePlayerScore(p1));
             }
         });
+        
         int rank = 1;
         for(Player player : players) {
             System.out.println("Player: " + player.getName());
