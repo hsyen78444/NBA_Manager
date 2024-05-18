@@ -1,6 +1,16 @@
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+
 public class Player {
-    private String name;
+	private String name;
     private int age;
+    private int id;
+    public static int count = 0;
     private String position;
     private double height; // in metres
     private double weight; // in kilograms
@@ -13,113 +23,141 @@ public class Player {
     private double stealsPerGame;
     private double blocksPerGame;
 
-    public Player(String name, int age, String position, double height, double weight, double salary, 
-            double pointsPerGame, double reboundsPerGame, double assistsPerGame, double stealsPerGame, double blocksPerGame) {
-        this.name = name;
-        this.age = age;
-        this.position = position;
-        this.height = height;
-        this.weight = weight;
-        this.salary = salary;
-        this.pointsPerGame = pointsPerGame;
-        this.reboundsPerGame = reboundsPerGame;
-        this.assistsPerGame = assistsPerGame;
-        this.stealsPerGame = stealsPerGame;
-        this.blocksPerGame = blocksPerGame;
+    public Player(int id) {
+    	String url = "jdbc:mysql://localhost:3306/NBA_Manager_DB";
+		String user ="root";
+		String password = "password";
+    	try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection connection = DriverManager.getConnection(url, user, password);
+			Statement statement = connection.createStatement();
+	        String query = "SELECT * FROM nba_2 where id = " + id;
+	        ResultSet re = statement.executeQuery(query);
+	        if(re.next()) {
+	        this.id = re.getInt("Id");
+	        this.name = re.getString("Name");
+	        this.height = re.getDouble("Height");
+	        this.weight = re.getDouble("Weight");
+	        this.age = re.getInt("age");
+	        this.salary = re.getInt("Salary");
+	        this.position = re.getString("Position");
+	        this.reboundsPerGame = re.getDouble("REB")/100;
+	        this.assistsPerGame = re.getDouble("AST")/100;
+	        this.stealsPerGame = re.getDouble("STL")/100;
+	        this.blocksPerGame = re.getDouble("BLK")/100;
+	        this.pointsPerGame = re.getDouble("PTS")/100;
+	        System.out.println("New player created!");}
+
+
+
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+
+		}
+
     }
-            
+	public static void main(String[] args) {
+		Player pl = new Player(1);
+		System.out.println(pl.position);
+
+	}
+
+
+
     public String getName() {
         return name;
     }
-            
+
     public String getPosition() {
         return position;
     }
-            
+
     public double getHeight() {
         return height;
     }
-            
+
     public double getWeight() {
         return weight;
     }
-            
+
     public double getSalary() {
         return salary;
     }
-            
+
     public void setName(String name) {
         this.name = name;
     }
-            
+
     public void setPosition(String position) {
         this.position = position;
     }
-            
+
     public void setHeight(double height) {
         this.height = height;
     }
-            
+
     public void setWeight(double weight) {
         this.weight = weight;
     }
-            
+
     public void setSalary(double salary) {
         this.salary = salary;
     }
-            
+
     public int getAge() {
         return age;
     }
-            
+
     public void setAge(int age) {
         this.age = age;
     }
-            
+
     public double getPointsPerGame() {
         return pointsPerGame;
     }
-            
+
     public void setPointsPerGame(double pointsPerGame) {
         this.pointsPerGame = pointsPerGame;
     }
-            
+
     public double getReboundsPerGame() {
         return reboundsPerGame;
     }
-            
+
     public void setReboundsPerGame(double reboundsPerGame) {
         this.reboundsPerGame = reboundsPerGame;
     }
-            
+
     public double getAssistsPerGame() {
         return assistsPerGame;
     }
-            
+
     public void setAssistsPerGame(double assistsPerGame) {
         this.assistsPerGame = assistsPerGame;
     }
-            
+
     public double getStealsPerGame() {
         return stealsPerGame;
     }
-            
+
     public void setStealsPerGame(double stealsPerGame) {
         this.stealsPerGame = stealsPerGame;
     }
-            
+
     public double getBlocksPerGame() {
         return blocksPerGame;
     }
-            
+
     public void setBlocksPerGame(double blocksPerGame) {
         this.blocksPerGame = blocksPerGame;
     }
-            
+
     public String getCondition() {
         return condition;
     }
-            
+
     public void setCondition(String condition) {
         this.condition = condition;
     }
