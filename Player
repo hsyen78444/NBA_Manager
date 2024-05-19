@@ -5,51 +5,54 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-
 public class Player {
 	private String name;
-    private int age;
-    private int id;
-    public static int count = 0;
-    private String position;
-    private double height; // in metres
-    private double weight; // in kilograms
-    private double salary;
-    private String condition = "Healthy";
+	private int age;
 
-    private double pointsPerGame;
-    private double reboundsPerGame;
-    private double assistsPerGame;
-    private double stealsPerGame;
-    private double blocksPerGame;
+	public static int count = 0;
+	private String position;
+	private double height; // in metres
+	private double weight; // in kilograms
+	private double salary;
+	private String condition = "Healthy";
 
-    public Player(int id) {
-    	String url = "jdbc:mysql://localhost:3306/NBA_Manager_DB";
-		String user ="root";
+	private double pointsPerGame;
+	private double reboundsPerGame;
+	private double assistsPerGame;
+	private double stealsPerGame;
+	private double blocksPerGame;
+
+	public Player(int id) {
+		String url = "jdbc:mysql://localhost:3306/NBA_Manager_DB";
+		String user = "root";
 		String password = "password";
-    	try {
+		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection(url, user, password);
 			Statement statement = connection.createStatement();
-	        String query = "SELECT * FROM nba_2 where id = " + id;
-	        ResultSet re = statement.executeQuery(query);
-	        if(re.next()) {
-	        this.id = re.getInt("Id");
-	        this.name = re.getString("Name");
-	        this.height = re.getDouble("Height");
-	        this.weight = re.getDouble("Weight");
-	        this.age = re.getInt("age");
-	        this.salary = re.getInt("Salary");
-	        this.position = re.getString("Position");
-	        this.reboundsPerGame = re.getDouble("REB")/100;
-	        this.assistsPerGame = re.getDouble("AST")/100;
-	        this.stealsPerGame = re.getDouble("STL")/100;
-	        this.blocksPerGame = re.getDouble("BLK")/100;
-	        this.pointsPerGame = re.getDouble("PTS")/100;
-	        System.out.println("New player created!");}
+			String query = "SELECT * FROM nba_2 where id = " + id;
+			ResultSet re = statement.executeQuery(query);
+			if (re.next()) {
 
+				this.name = re.getString("Name");
 
-
+				this.height = re.getDouble("Height") / 100;
+				this.weight = re.getDouble("Weight");
+				this.age = re.getInt("age");
+				this.salary = re.getInt("Salary");
+				this.position = re.getString("Position");
+				this.reboundsPerGame = round(re.getDouble("REB") / re.getDouble("GP"));
+				;
+				this.assistsPerGame = round(re.getDouble("AST") / re.getDouble("GP"));
+				;
+				this.stealsPerGame = round(re.getDouble("STL") / re.getDouble("GP"));
+				;
+				this.blocksPerGame = round(re.getDouble("BLK") / re.getDouble("GP"));
+				;
+				this.pointsPerGame = round(re.getDouble("PTS") / re.getDouble("GP"));
+				;
+				System.out.println("New player created!");
+			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -57,108 +60,132 @@ public class Player {
 
 		}
 
-    }
-	public static void main(String[] args) {
-		Player pl = new Player(1);
-		System.out.println(pl.position);
+	}
+
+	private double round(double d) {
+		String temp = String.valueOf(d);
+		String newd = "";
+		int i = 1;
+		for (char db : temp.toCharArray()) {
+			if (db != '.') {
+				newd += db;
+				i++;
+
+			} else {
+				return Double.valueOf(newd + "." + temp.charAt(i));
+			}
+
+		}
+		return Double.valueOf(newd + "." + temp.charAt(i));
 
 	}
 
+	public static void main(String[] args) {
+		Player pl = new Player(1);
 
 
-    public String getName() {
-        return name;
-    }
+	}
 
-    public String getPosition() {
-        return position;
-    }
+	void getInfo() {
+		System.out.println("Name: " + this.name + " Age: " + this.age + "\nHeight: " + this.height + "m; Weight: "
+				+ this.weight + "kg\nPointsPerGame: " + this.pointsPerGame + "; assistsPerGame: " + this.reboundsPerGame
+				+ "\nStealsPerGame: " + this.stealsPerGame +"; BlocksPerGame: " +this.blocksPerGame+"\nReboundsPerGame: " +this.reboundsPerGame);
 
-    public double getHeight() {
-        return height;
-    }
+	}
 
-    public double getWeight() {
-        return weight;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public double getSalary() {
-        return salary;
-    }
+	public String getPosition() {
+		return position;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public double getHeight() {
+		return height;
+	}
 
-    public void setPosition(String position) {
-        this.position = position;
-    }
+	public double getWeight() {
+		return weight;
+	}
 
-    public void setHeight(double height) {
-        this.height = height;
-    }
+	public double getSalary() {
+		return salary;
+	}
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
+	public void setPosition(String position) {
+		this.position = position;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public void setHeight(double height) {
+		this.height = height;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
 
-    public double getPointsPerGame() {
-        return pointsPerGame;
-    }
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
 
-    public void setPointsPerGame(double pointsPerGame) {
-        this.pointsPerGame = pointsPerGame;
-    }
+	public int getAge() {
+		return age;
+	}
 
-    public double getReboundsPerGame() {
-        return reboundsPerGame;
-    }
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-    public void setReboundsPerGame(double reboundsPerGame) {
-        this.reboundsPerGame = reboundsPerGame;
-    }
+	public double getPointsPerGame() {
+		return pointsPerGame;
+	}
 
-    public double getAssistsPerGame() {
-        return assistsPerGame;
-    }
+	public void setPointsPerGame(double pointsPerGame) {
+		this.pointsPerGame = pointsPerGame;
+	}
 
-    public void setAssistsPerGame(double assistsPerGame) {
-        this.assistsPerGame = assistsPerGame;
-    }
+	public double getReboundsPerGame() {
+		return reboundsPerGame;
+	}
 
-    public double getStealsPerGame() {
-        return stealsPerGame;
-    }
+	public void setReboundsPerGame(double reboundsPerGame) {
+		this.reboundsPerGame = reboundsPerGame;
+	}
 
-    public void setStealsPerGame(double stealsPerGame) {
-        this.stealsPerGame = stealsPerGame;
-    }
+	public double getAssistsPerGame() {
+		return assistsPerGame;
+	}
 
-    public double getBlocksPerGame() {
-        return blocksPerGame;
-    }
+	public void setAssistsPerGame(double assistsPerGame) {
+		this.assistsPerGame = assistsPerGame;
+	}
 
-    public void setBlocksPerGame(double blocksPerGame) {
-        this.blocksPerGame = blocksPerGame;
-    }
+	public double getStealsPerGame() {
+		return stealsPerGame;
+	}
 
-    public String getCondition() {
-        return condition;
-    }
+	public void setStealsPerGame(double stealsPerGame) {
+		this.stealsPerGame = stealsPerGame;
+	}
 
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
+	public double getBlocksPerGame() {
+		return blocksPerGame;
+	}
+
+	public void setBlocksPerGame(double blocksPerGame) {
+		this.blocksPerGame = blocksPerGame;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
 }

@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 
 public class Roster {
@@ -14,28 +16,47 @@ public class Roster {
     private double totalSalaryCap = 20000;
     private double remainingSalaryCap = totalSalaryCap;
     // private double minSuperstarSalary = 3000;
-    // private double minNonSuperstarSalary = 1000; 
+    // private double minNonSuperstarSalary = 1000;
+
 
     public Roster(String teamName) {
         this.teamName = teamName;
         this.roster = new ArrayList<>();
     }
+    public static void main(String[] args) {
+    	Player pl = new Player(1);
+    	Player pl1 = new Player(2);
+    	Player pl2 = new Player(527);
+    	Player pl3 = new Player(528);
+    	Player pl4 = new Player(529);
+    	Player pl5 = new Player(536);
+
+
+		Roster roster1 = new Roster("HST");
+		roster1.addPlayer(pl);
+		roster1.addPlayer(pl1);
+		roster1.addPlayer(pl2);
+		roster1.addPlayer(pl3);
+		roster1.addPlayer(pl4);
+		roster1.addPlayer(pl5);
+		roster1.printRoster();
+	}
 
     public void addPlayer(Player player) {
         if (roster.size() < maxPlayers && remainingSalaryCap >= player.getSalary()) {
             roster.add(player);
-            if(player.getPosition().equalsIgnoreCase("Forward")) {
+            if(player.getPosition().equalsIgnoreCase("F")) {
                 forwardPlayer++;
             }
-            else if(player.getPosition().equalsIgnoreCase("Guard")) {
+            else if(player.getPosition().equalsIgnoreCase("G")) {
                 guardPlayer++;
             }
-            else if(player.getPosition().equalsIgnoreCase("Centre")) {
+            else if(player.getPosition().equalsIgnoreCase("C")) {
                 centrePlayer++;
             }
             remainingSalaryCap -= player.getSalary();
             System.out.println(player.getName() + " added to " + teamName + ".");
-        } 
+        }
         else {
             System.out.println("Cannot add " + player.getName() + ". Roster is full or salary cap exceeded.");
         }
@@ -44,18 +65,18 @@ public class Roster {
     public void removePlayer(Player player) {
         if(roster.size() > minPlayers) {
             roster.remove(player);
-            if(player.getPosition().equalsIgnoreCase("Forward")) {
+            if(player.getPosition().equalsIgnoreCase("F")) {
                 forwardPlayer--;
             }
-            else if(player.getPosition().equalsIgnoreCase("Guard")) {
+            else if(player.getPosition().equalsIgnoreCase("G")) {
                 guardPlayer--;
             }
-            else if(player.getPosition().equalsIgnoreCase("Centre")) {
+            else if(player.getPosition().equalsIgnoreCase("C")) {
                 centrePlayer--;
             }
             remainingSalaryCap += player.getSalary();
             System.out.println(player.getName() + " removed from " + teamName + ".");
-        } 
+        }
         else {
             System.out.println("Cannot remove " + player.getName() + ". Number of players is less than 10.");
         }
@@ -83,13 +104,13 @@ public class Roster {
             String playerSPG = String.format("%6s",player.getStealsPerGame());
             String playerBPG = String.format("%6s",player.getBlocksPerGame());
 
-            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | " + playerWeight + " | " + playerPosition + " | " 
+            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | " + playerWeight + " | " + playerPosition + " | "
                               + playerSalary + " | " + playerPPG + " | " + playerRPG + " | "  + playerAPG + " | " + playerSPG + " | " + playerBPG;
-            
+
             System.out.println(playerInfo);
         }
     }
-    
+
 
     public void printRoster(ArrayList<Player> result) {
         System.out.println("Player List :");
@@ -109,57 +130,57 @@ public class Roster {
             String playerSPG = String.format("%6s",player.getStealsPerGame());
             String playerBPG = String.format("%6s",player.getBlocksPerGame());
 
-            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | " + playerWeight + " | " + playerPosition + " | " 
+            String playerInfo = playerName + "|" + playerAge + " | " + playerHeight + " | " + playerWeight + " | " + playerPosition + " | "
                               + playerSalary + " | " + playerPPG + " | " + playerRPG + " | "  + playerAPG + " | " + playerSPG + " | " + playerBPG;
-            
+
             System.out.println(playerInfo);
         }
     }
-    
+
     public String getTeamName() {
         return teamName;
     }
-    
+
     public ArrayList<Player> getRoster() {
         return roster;
     }
-    
+
     public int getForwardPlayer() {
         return forwardPlayer;
     }
-    
+
     public int getGuardPlayer() {
         return guardPlayer;
     }
-    
+
     public int getCentrePlayer() {
         return centrePlayer;
     }
-    
+
     public int getMinPlayers() {
         return minPlayers;
     }
-    
+
     public int getMaxPlayers() {
         return maxPlayers;
     }
-    
+
     public int getMinGuards() {
         return minGuards;
     }
-    
+
     public int getMinForwards() {
         return minForwards;
     }
-    
+
     public int getMinCenters() {
         return minCenters;
     }
-    
+
     public double getTotalSalaryCap() {
         return totalSalaryCap;
     }
-    
+
     public double getRemainingSalaryCap() {
         return remainingSalaryCap;
     }
