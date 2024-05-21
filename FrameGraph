@@ -1,0 +1,19 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+public class FrameGraph extends JFrame {
+    PanelGraph panel;
+
+    FrameGraph(){
+        this.setTitle("NBA Graph");
+        panel=new PanelGraph();
+        this.add(panel);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+
+    }
+    
+}
