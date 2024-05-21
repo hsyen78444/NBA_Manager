@@ -1,0 +1,164 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+import assignment.WeightedGraph;
+import assignment.DFS;
+import assignment.BFS;
+import java.util.ArrayList;
+/**
+ *
+ * @author User
+ */
+public class PanelGraph extends JPanel implements ActionListener{
+    final int PANEL_WIDTH=900;
+    final int PANEL_HEIGHT=600;
+    Image wgraph,aeroplane;
+    JButton dfsButton;
+    JButton bfsButton;
+    JLabel label;
+    JLabel label2;
+    Timer timer;
+    int xVelocity=1;
+    int yVelocity=1;
+    int xTarget=0;
+    int yTarget=0;
+    int x=390;
+    int y=500;
+    private Point[]targets;
+    int currentTargetIndex;
+    int distanceTravel=0;
+    String travel="";
+    WeightedGraph<String,Integer>nba;
+    PanelGraph(){
+        nba=new WeightedGraph<>();
+        String[]cities={"San Antonio","Golden State","Boston","Miami",
+            "Los Angeles","Phoenix","Orlando","Denver","Oklahoma City","Houston"};
+        String[]teams={"Spurs","Warriors","Celtics","Heat",
+            "Lakers","Suns","Magic","Nuggets","Thunder","Rockets"};
+        for(int i=0;i<cities.length;i++)nba.addVertex(teams[i],cities[i]);
+        nba.getVertex("Spurs").setCoordinate(330,400);
+        nba.getVertex("Warriors").setCoordinate(20,20);
+        nba.getVertex("Celtics").setCoordinate(775,-20);
+        nba.getVertex("Heat").setCoordinate(740,410);
+        nba.getVertex("Lakers").setCoordinate(5,170);
+        nba.getVertex("Suns").setCoordinate(200,270);
+        nba.getVertex("Magic").setCoordinate(620,330);
+        nba.getVertex("Nuggets").setCoordinate(355,30);
+        nba.getVertex("Thunder").setCoordinate(360,230);
+        nba.getVertex("Rockets").setCoordinate(540,190);
+        nba.addUndirectedEdge("Spurs", "Suns", 500);
+        nba.addUndirectedEdge("Spurs", "Thunder", 678);
+        nba.addUndirectedEdge("Spurs", "Rockets", 983);
+        nba.addUndirectedEdge("Spurs", "Magic", 1137);
+        nba.addUndirectedEdge("Lakers", "Suns", 577);
+        nba.addUndirectedEdge("Lakers", "Warriors", 554);
+        nba.addUndirectedEdge("Lakers", "Thunder", 1901);
+        nba.addUndirectedEdge("Thunder", "Warriors", 2214);
+        nba.addUndirectedEdge("Thunder", "Nuggets", 942);
+        nba.addUndirectedEdge("Warriors", "Nuggets", 1507);
+        nba.addUndirectedEdge("Nuggets", "Celtics", 2845);
+        nba.addUndirectedEdge("Celtics", "Rockets", 2584);
+        nba.addUndirectedEdge("Celtics", "Heat", 3045);
+        nba.addUndirectedEdge("Heat", "Magic", 268);
+        nba.addUndirectedEdge("Magic", "Rockets", 458);
+        nba.addUndirectedEdge("Rockets", "Thunder", 778);
+        timer=new Timer(1,new ActionListener(){
+            public void actionPerformed(ActionEvent e){            
+            moveTowardsTarget();   
+            repaint();
+            }
+        });
+        this.setPreferredSize(new Dimension(PANEL_WIDTH,PANEL_HEIGHT));
+        this.setBackground(Color.WHITE);
+        this.setLayout(null);
+        wgraph=new ImageIcon("wgraph.png").getImage();
+        aeroplane=new ImageIcon("aeroplane.png").getImage();
+        dfsButton=new JButton("DFS");
+        bfsButton=new JButton("BFS");
+        dfsButton.setBounds(300,500,100,50);
+        dfsButton.addActionListener(this);
+        dfsButton.setFocusable(false);
+        bfsButton.setBounds(500,500,100,50);
+        bfsButton.addActionListener(this);
+        bfsButton.setFocusable(false);
+        this.add(dfsButton);
+        this.add(bfsButton);
+        label=new JLabel();
+        label.setFont(new Font("MV Boli",Font.BOLD,15));
+        label.setBounds(80,530,1000,100);
+        label.setVisible(false);
+        this.add(label);
+        label2=new JLabel();
+        label2.setFont(new Font("MV Boli",Font.BOLD,30));
+        label2.setForeground(Color.cyan);
+        label2.setBounds(350,530,1000,100);
+        label2.setText("Travelling . . .");
+        label2.setVisible(false);
+        this.add(label2);
+    }
+    public void paint(Graphics g){
+        super.paint(g);
+        Graphics2D g2D=(Graphics2D)g;
+        g2D.drawImage(wgraph,0,0, null);
+        g2D.drawImage(aeroplane,x ,y, null);
+    }
+    public void actionPerformed(ActionEvent e){
+        label.setVisible(false);
+        label2.setVisible(true);
+        if(e.getSource()==dfsButton){
+            DFS<String,Integer>dfs=new DFS(nba);
+            ArrayList<String>list=dfs.dfs("Spurs");
+            travel=list.toString();
+            distanceTravel=dfs.calcDFSTotal(list);
+            label.setText(travel+"   :   "+distanceTravel+"KM");
+            targets=new Point[list.size()];
+            for(int i=0;i<list.size();i++)targets[i]=new Point(nba.getVertex(list.get(i)).getX(),nba.getVertex(list.get(i)).getY());
+            currentTargetIndex=0;
+            setTarget(targets[currentTargetIndex]);
+            timer.start();
+        }
+        else if(e.getSource()==bfsButton){
+            BFS<String,Integer>bfs=new BFS(nba);
+            ArrayList<String>path=bfs.BFSLogicalPath(bfs.bfs("Spurs"));
+            ArrayList<String>list=bfs.bfs("Spurs");
+            travel=list.toString();
+            distanceTravel=bfs.calcBFSTotal(list);
+            label.setText(travel+"   :   "+distanceTravel+"KM");
+            targets=new Point[path.size()];
+            for(int i=0;i<path.size();i++)targets[i]=new Point(nba.getVertex(path.get(i)).getX(),nba.getVertex(path.get(i)).getY());
+            currentTargetIndex=0;
+            setTarget(targets[currentTargetIndex]);
+            timer.start();
+        }
+    }
+    public void setTarget(Point target){
+        xTarget=target.x;
+        yTarget=target.y;
+    }
+    public void moveTowardsTarget(){
+        if(x<xTarget){
+            x+=xVelocity;           
+        }
+        else if(x>xTarget){
+            x-=xVelocity;       
+        }
+        if(y<yTarget){
+            y+=yVelocity;
+        }
+        else if(y>yTarget){
+            y-=yVelocity;
+        }
+        if(x==xTarget&&y==yTarget){
+            currentTargetIndex++;
+            if(currentTargetIndex<targets.length){
+                setTarget(targets[currentTargetIndex]);
+            }else { 
+                label2.setVisible(false);
+                label.setVisible(true);
+                timer.stop(); 
+            }
+        }
+    }
+    
+}
