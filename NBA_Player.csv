@@ -1,4 +1,4 @@
-id,Name,Position,Height,Weight,Age,GP,REB,AST,STL,BLK,PTS,Salary
+ID,Name,Position,Height,Weight,Age,GP,REB,AST,STL,BLK,PTS,Salary
 1,"Stephen Curry",G,188,84,35,63,345,363,77,8,2015,3000
 2,"Damian Lillard",G,188,88,32,67,283,505,62,17,1928,3000
 3,"Nikola Jokic",C,211,129,28,72,780,599,95,48,1898,3000
