@@ -89,11 +89,7 @@ public class Searching {
 	 * public boolean postionFilter(String position, Player player) { return
 	 * (player.getPosition().equals(position)); }
 	 */
-	public static void main(String[] args) {
-		Searching test2 = new Searching();
-		test2.dynamicSearching();
 
-	}
 
 	static public void printSpecificRoster(ArrayList<Player> specific) {
 		System.out.println("Player List :");

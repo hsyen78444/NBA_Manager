@@ -1,0 +1,38 @@
+
+public class NBA_Main {
+public static void main(String[] args) {
+	Player pl = new Player(1);
+	Player pl1 = new Player(2);
+	Player pl2 = new Player(527);
+	Player pl3 = new Player(528);
+	Player pl4 = new Player(529);
+	Player pl5 = new Player(536);
+	//Player create
+
+	Roster roster1 = new Roster("HST");
+	//Roster create
+	roster1.addPlayer(pl);
+	roster1.addPlayer(pl1);
+	roster1.addPlayer(pl2);
+	roster1.addPlayer(pl3);
+	roster1.addPlayer(pl4);
+	roster1.addPlayer(pl5);
+	//Roster add
+	roster1.removePlayer(pl5);
+	//Roster remove
+	roster1.printRoster();
+	//Roster print
+	roster1.IRM.addToInjuryReserve(pl5, "Headche");
+	roster1.IRM.displayInjuredPlayers();
+	//Injury Reserve Management
+	roster1.CEQ.enqueue(pl5);
+	roster1.CEQ.dequeue();
+	//Contract Extension Queue
+	roster1.PPR.printRanking(roster1.roster);
+	//Player Performance Ranking
+	Searching test2 = new Searching();
+	test2.dynamicSearching();
+	//Dynamic Searching
+
+}
+}

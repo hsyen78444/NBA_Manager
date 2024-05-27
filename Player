@@ -72,11 +72,7 @@ public class Player {
 	        return Math.round(value * 10) / 10.0;
 	    }
 
-	public static void main(String[] args) {
-		Player pl = new Player(1);
 
-
-	}
 	public static ArrayList<Player> fullPlayerList(){
 		int id = 1;
 		ArrayList<Player> list = new ArrayList<Player>();
