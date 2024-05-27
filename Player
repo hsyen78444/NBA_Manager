@@ -1,5 +1,3 @@
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,36 +28,28 @@ public class Player {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection(url, user, password);
 			Statement statement = connection.createStatement();
-			String query = "SELECT * FROM nba_2 where id = " + id;
+			String query = "SELECT * FROM nba_2 where ID = " + id;
 			ResultSet re = statement.executeQuery(query);
 			if (re.next()) {
 
 				this.name = re.getString("Name");
-
 				this.height = re.getDouble("Height") / 100;
 				this.weight = re.getDouble("Weight");
 				this.age = re.getInt("age");
 				this.salary = re.getInt("Salary");
 				this.position = re.getString("Position");
 				this.reboundsPerGame = round(re.getDouble("REB") / re.getDouble("GP"));
-				;
-				this.assistsPerGame = round(re.getDouble("AST") / re.getDouble("GP"));
-				;
-				this.stealsPerGame = round(re.getDouble("STL") / re.getDouble("GP"));
-				;
-				this.blocksPerGame = round(re.getDouble("BLK") / re.getDouble("GP"));
-				;
+				this.assistsPerGame = round(re.getDouble("AST") / re.getDouble("GP"));				
+				this.stealsPerGame = round(re.getDouble("STL") / re.getDouble("GP"));				
+				this.blocksPerGame = round(re.getDouble("BLK") / re.getDouble("GP"));				
 				this.pointsPerGame = round(re.getDouble("PTS") / re.getDouble("GP"));
-				;
+
 				System.out.println("New player created!");
 			}
-
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-
 		}
-
 	}
 
 	private double round(double d) {
@@ -70,27 +60,21 @@ public class Player {
 			if (db != '.') {
 				newd += db;
 				i++;
-
 			} else {
 				return Double.valueOf(newd + "." + temp.charAt(i));
 			}
-
 		}
 		return Double.valueOf(newd + "." + temp.charAt(i));
-
 	}
 
 	public static void main(String[] args) {
 		Player pl = new Player(1);
-
-
 	}
 
 	void getInfo() {
 		System.out.println("Name: " + this.name + " Age: " + this.age + "\nHeight: " + this.height + "m; Weight: "
 				+ this.weight + "kg\nPointsPerGame: " + this.pointsPerGame + "; assistsPerGame: " + this.reboundsPerGame
 				+ "\nStealsPerGame: " + this.stealsPerGame +"; BlocksPerGame: " +this.blocksPerGame+"\nReboundsPerGame: " +this.reboundsPerGame);
-
 	}
 
 	public String getName() {
