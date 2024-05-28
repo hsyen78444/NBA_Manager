@@ -205,12 +205,13 @@ public class WeightedGraph <T extends Comparable<T>,N extends Comparable<N>>{
             temp=temp.nextVertex;
         }
     }
-    public WeightedGraph<T,N> createNBAGraph(){
+    
+    public WeightedGraph<String,Integer> createNBAGraph(){
         String[]cities={"San Antonio","Golden State","Boston","Miami",
             "Los Angeles","Phoenix","Orlando","Denver","Oklahoma City","Houston"};
         String[]teams={"Spurs","Warriors","Celtics","Heat",
             "Lakers","Suns","Magic","Nuggets","Thunder","Rockets"};
-        WeightedGraph nba=new WeightedGraph();
+        WeightedGraph <String,Integer>nba=new WeightedGraph();
         for(int i=0;i<cities.length;i++)nba.addVertex(teams[i],cities[i]);
         nba.getVertex("Spurs").setCoordinate(330,400);
         nba.getVertex("Warriors").setCoordinate(20,20);
