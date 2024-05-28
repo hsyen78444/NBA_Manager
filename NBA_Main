@@ -33,6 +33,10 @@ public static void main(String[] args) {
 	Searching test2 = new Searching();
 	test2.dynamicSearching();
 	//Dynamic Searching
-
+	WeightedGraph nba=new WeightedGraph();
+       	nba=nba.createNBAGraph();
+	//Create NBA graph
+	new FrameGraph(nba);
+	//Craft the journey
 }
 }
