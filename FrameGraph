@@ -5,9 +5,9 @@ import javax.swing.*;
 public class FrameGraph extends JFrame {
     PanelGraph panel;
 
-    FrameGraph(){
+    FrameGraph(WeightedGraph<String,Integer> w){
         this.setTitle("NBA Graph");
-        panel=new PanelGraph();
+        panel=new PanelGraph(w);
         this.add(panel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
