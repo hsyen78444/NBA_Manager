@@ -56,6 +56,9 @@ public class DFS<T extends Comparable<T>,N extends Comparable <N>> {
                
            }
        }
+System.out.println("\nDFS is a better selection in this situation, \n"
+                + "as although BFS go through all the vertices,\n"
+                + "it functions to find the unweighted shortest path between two vertices only.");
        return total;
    }
 }
