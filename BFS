@@ -3,15 +3,12 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-/**
- *
- * @author User
- */
 public class BFS<T extends Comparable<T>,N extends Comparable <N>> {
     WeightedGraph<T,N> graph=new WeightedGraph<>();
     public BFS(WeightedGraph<T,N> wg){
         graph=wg;
     }
+    //this is BFS algorithm
     public ArrayList<T> bfs(T startVertex){
         Vertex<T,N>temp=graph.head;
         while(temp!=null){
@@ -46,6 +43,7 @@ public class BFS<T extends Comparable<T>,N extends Comparable <N>> {
        }
        return sl;
    }
+    //the total distance travelled is calculated based on logical path
     public int calcBFSTotal(ArrayList<T>sl){
        int total=0,minus=0;
        ArrayList<T>pac=graph.getVertex(sl.get(0)).isPath();
@@ -73,6 +71,7 @@ public class BFS<T extends Comparable<T>,N extends Comparable <N>> {
        total=total-minus;
        return total;  
    }
+    //since BFS is not as suitable as DFS to search the total distance travel including all the vertex in this situatin,a logical path travelled using BFS is created
     public ArrayList<T> BFSLogicalPath(ArrayList<T>sl){
         ArrayList<T>logicalPath=new ArrayList<>();
         for(int i=1;i<sl.size();i++){
