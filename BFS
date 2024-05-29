@@ -45,6 +45,7 @@ public class BFS<T extends Comparable<T>,N extends Comparable <N>> {
    }
     //BFS and DFS are the algorithm that travel all the vertexes and more suitable to be used in this "crafting the journey" compared to dijkstra's algorithm, a* algorithm. 
     //However, BFS is not as suitable as DFS to search the shortest total distances travel including all the vertexes in this situation
+    //For example, the result of bfs is [Spurs, Suns, Thunder, Rockets, Magic, Lakers, Nuggets, Warriors, Celtics, Heat], but there is no edge between Suns to Thunder.
     //Thus,a logical path travelled using BFS's result is created
     public ArrayList<T> BFSLogicalPath(ArrayList<T>sl){
         ArrayList<T>logicalPath=new ArrayList<>();
