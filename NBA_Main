@@ -35,6 +35,7 @@ public static void main(String[] args) {
 	//Dynamic Searching
 	WeightedGraph nba=new WeightedGraph();
        	nba=nba.createNBAGraph();
+	nba.printEdges();
 	//Create NBA graph
 	new FrameGraph(nba);
 	//Craft the journey
