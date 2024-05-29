@@ -43,35 +43,9 @@ public class BFS<T extends Comparable<T>,N extends Comparable <N>> {
        }
        return sl;
    }
-    //the total distance travelled is calculated based on logical path
-    public int calcBFSTotal(ArrayList<T>sl){
-       int total=0,minus=0;
-       ArrayList<T>pac=graph.getVertex(sl.get(0)).isPath();
-       for(int i=1;i<sl.size();i++){
-           ArrayList<T>pa=graph.getVertex(sl.get(i)).isPath();
-           for(int j=0,k=1;k<pa.size();j++,k++){
-               if(pac.size()==pa.size()&&pa.size()>=3&&pa.get(pa.size()-2).compareTo(pac.get(pac.size()-2))==0){
-                   total=total+Integer.parseInt(graph.getEdgeWeight(pa.get(pa.size()-2),pa.get(pa.size()-1)).toString());
-                   if(i==sl.size()-1){
-                       minus=minus+Integer.parseInt(graph.getEdgeWeight(pa.get(pa.size()-2),pa.get(pa.size()-1)).toString());
-                       for(int m=pa.size()-2,n=m-1;n!=-1;n--,m--){
-                           minus=minus+Integer.parseInt(graph.getEdgeWeight(pa.get(n),pa.get(m)).toString());
-                       }
-                   }
-                   break;
-               }
-               else{
-                   if(i==sl.size()-1)minus=minus+Integer.parseInt(graph.getEdgeWeight(pa.get(j),pa.get(k)).toString());
-                   total=total+Integer.parseInt(graph.getEdgeWeight(pa.get(j),pa.get(k)).toString());  
-               }
-           }
-           pac=pa;
-       }
-       total=total*2;
-       total=total-minus;
-       return total;  
-   }
-    //since BFS is not as suitable as DFS to search the total distance travel including all the vertex in this situatin,a logical path travelled using BFS is created
+    //BFS and DFS are the algorithm that travel all the vertexes and more suitable to be used in this "crafting the journey" compared to dijkstra's algorithm, a* algorithm. 
+    //However, BFS is not as suitable as DFS to search the shortest total distances travel including all the vertexes in this situation
+    //Thus,a logical path travelled using BFS's result is created
     public ArrayList<T> BFSLogicalPath(ArrayList<T>sl){
         ArrayList<T>logicalPath=new ArrayList<>();
         for(int i=1;i<sl.size();i++){
@@ -102,6 +76,35 @@ public class BFS<T extends Comparable<T>,N extends Comparable <N>> {
             }
             }
         }
-return logicalPath;
+    return logicalPath;
     }
+
+    //the total distance travelled is calculated based on logical path idea
+    public int calcBFSTotal(ArrayList<T>sl){
+       int total=0,minus=0;
+       ArrayList<T>pac=graph.getVertex(sl.get(0)).isPath();
+       for(int i=1;i<sl.size();i++){
+           ArrayList<T>pa=graph.getVertex(sl.get(i)).isPath();
+           for(int j=0,k=1;k<pa.size();j++,k++){
+               if(pac.size()==pa.size()&&pa.size()>=3&&pa.get(pa.size()-2).compareTo(pac.get(pac.size()-2))==0){
+                   total=total+Integer.parseInt(graph.getEdgeWeight(pa.get(pa.size()-2),pa.get(pa.size()-1)).toString());
+                   if(i==sl.size()-1){
+                       minus=minus+Integer.parseInt(graph.getEdgeWeight(pa.get(pa.size()-2),pa.get(pa.size()-1)).toString());
+                       for(int m=pa.size()-2,n=m-1;n!=-1;n--,m--){
+                           minus=minus+Integer.parseInt(graph.getEdgeWeight(pa.get(n),pa.get(m)).toString());
+                       }
+                   }
+                   break;
+               }
+               else{
+                   if(i==sl.size()-1)minus=minus+Integer.parseInt(graph.getEdgeWeight(pa.get(j),pa.get(k)).toString());
+                   total=total+Integer.parseInt(graph.getEdgeWeight(pa.get(j),pa.get(k)).toString());  
+               }
+           }
+           pac=pa;
+       }
+       total=total*2;
+       total=total-minus;
+       return total;  
+   }
 }
