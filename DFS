@@ -10,6 +10,7 @@ public class DFS<T extends Comparable<T>,N extends Comparable <N>> {
     public DFS(WeightedGraph<T,N> wg){
         graph=wg;
     }
+    //this is DFS algorithm
     public ArrayList<T> dfs(T startVertex){
         Vertex<T,N>temp=graph.head;
         while(temp!=null){
@@ -35,7 +36,7 @@ public class DFS<T extends Comparable<T>,N extends Comparable <N>> {
        }
        return sl;
    }
-   
+   //from the algorithm, calculate the total distance travel
    public int calcDFSTotal(ArrayList<T>sl){
        int total=0;
        for(int i=0,j=1;j<sl.size();i++,j++){
