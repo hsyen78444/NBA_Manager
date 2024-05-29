@@ -1,15 +1,22 @@
 import java.util.ArrayList;
 public class Vertex <T extends Comparable<T>,N extends Comparable<N>>{
+    //this is the NBA teams name
     T vertexInfo;
+    //this is the NBA teams cities
     T vertexInfo2;
     int indeg;
     int outdeg;
     Vertex<T,N> nextVertex;
     Edge<T,N> firstEdge;
+    //this is for gui purpose (x-axis)
     private int X;
+    //this is for gui purpose (y-axis)
     private int Y;
+    //this is for dfs and bfs searching purpose
     private boolean visited=false;
+    //this is to find the level of the vertex (in bfs)
     private int parents=-2;
+    //this is to find the path from beginning vertex to the current vertex for bfs
     private ArrayList<T> path=new ArrayList<>();
     
     public Vertex(){
