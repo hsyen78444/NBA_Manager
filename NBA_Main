@@ -1,43 +1,95 @@
-
+import java.util.Scanner;
 public class NBA_Main {
 public static void main(String[] args) {
-	Player pl = new Player(1);
-	Player pl1 = new Player(2);
-	Player pl2 = new Player(527);
-	Player pl3 = new Player(528);
-	Player pl4 = new Player(529);
-	Player pl5 = new Player(536);
-	//Player create
-
-	Roster roster1 = new Roster("HST");
-	//Roster create
-	roster1.addPlayer(pl);
-	roster1.addPlayer(pl1);
-	roster1.addPlayer(pl2);
-	roster1.addPlayer(pl3);
-	roster1.addPlayer(pl4);
-	roster1.addPlayer(pl5);
-	//Roster add
-	roster1.removePlayer(pl5);
-	//Roster remove
-	roster1.printRoster();
-	//Roster print
-	roster1.IRM.addToInjuryReserve(pl5, "Headche");
-	roster1.IRM.displayInjuredPlayers();
-	//Injury Reserve Management
-	roster1.CEQ.enqueue(pl5);
-	roster1.CEQ.dequeue();
-	//Contract Extension Queue
-	roster1.PPR.printRanking(roster1.roster);
-	//Player Performance Ranking
-	Searching test2 = new Searching();
-	test2.dynamicSearching();
-	//Dynamic Searching
-	WeightedGraph nba=new WeightedGraph();
-       	nba=nba.createNBAGraph();
-	nba.printEdges();
-	//Create NBA graph
-	new FrameGraph(nba);
-	//Craft the journey
+	System.out.println("-----------------------------------");
+	System.out.println("|************** NBA **************|");
+	System.out.println("-----------------------------------");
+	Scanner sc=new Scanner(System.in);
+	while(true){
+	System.out.println("Enter your number of selection :
+	\n 1 -> Create Player
+	\n 2 -> Create Roaster
+	\n 3 -> Add Roaster
+	\n 4 -> Remove Roaster
+	\n 5 -> Print Roster
+	\n 6 -> Injury Reserve Management
+	\n 7 -> Contract Extension Queue
+	\n 8 -> Player Performance Ranking
+	\n 9 -> Dynamic Searching
+	\n 10 -> Create NBA Graph
+	\n 11 -> Craft NBA Journey
+	\n 12 -> Quit
+	");
+	int selec=sc.nextInt();
+	switch (selec){
+		case 1:	
+			Player pl = new Player(1);
+			Player pl1 = new Player(2);
+			Player pl2 = new Player(527);
+			Player pl3 = new Player(528);
+			Player pl4 = new Player(529);
+			Player pl5 = new Player(536);
+			break;
+			//Player create
+		case 2:
+			Roster roster1 = new Roster("HST");
+			break;
+			//Roster create
+		case 3:
+			roster1.addPlayer(pl);
+			roster1.addPlayer(pl1);
+			roster1.addPlayer(pl2);
+			roster1.addPlayer(pl3);
+			roster1.addPlayer(pl4);
+			roster1.addPlayer(pl5);
+			break;
+			//Roster add
+		case 4:	
+			roster1.removePlayer(pl5);
+			break;
+			//Roster remove
+		case 5:
+			roster1.printRoster();
+			break;
+			//Roster print
+		case 6:
+			roster1.IRM.addToInjuryReserve(pl5, "Headche");
+			roster1.IRM.displayInjuredPlayers();
+			braek;
+			//Injury Reserve Management
+		case 7:	
+			roster1.CEQ.enqueue(pl5);
+			roster1.CEQ.dequeue();
+			break;
+			//Contract Extension Queue
+		case 8:
+			roster1.PPR.printRanking(roster1.roster);
+			break;
+			//Player Performance Ranking
+		case 9:	
+			Searching test2 = new Searching();
+			test2.dynamicSearching();
+			break;
+			//Dynamic Searching
+		case 10:
+			WeightedGraph nba=new WeightedGraph();
+       			nba=nba.createNBAGraph();
+			nba.printEdges();
+			break;
+			//Create NBA graph
+		case 11:	
+			new FrameGraph(nba);
+			break;
+			//Craft the journey
+		case 12:
+			System.out.print("Bye bye :)");
+			System.exit(0);
+			//Quit
+		default:
+			System.out.println("Number is not in the selections. Please try again !!");
+			break;
+			//Else number
+	}
+	}
 }
 }
